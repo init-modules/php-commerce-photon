@@ -2,6 +2,7 @@
 
 namespace Init\CommerceWebsiteBuilder;
 
+use Init\CommerceWebsiteBuilder\Pages\AccountOrdersPageDefinition;
 use Init\CommerceWebsiteBuilder\Pages\CartPageDefinition;
 use Init\CommerceWebsiteBuilder\Pages\CatalogPageDefinition;
 use Init\CommerceWebsiteBuilder\Pages\CheckoutPageDefinition;
@@ -27,7 +28,7 @@ class RootServiceProvider extends PackageServiceProvider
 
         $pageRegistry = $this->app->make(WebsiteBuilderPageRegistry::class);
 
-        foreach ([CatalogPageDefinition::class, ProductPageDefinition::class, CartPageDefinition::class, CheckoutPageDefinition::class] as $definition) {
+        foreach ([CatalogPageDefinition::class, ProductPageDefinition::class, CartPageDefinition::class, CheckoutPageDefinition::class, AccountOrdersPageDefinition::class] as $definition) {
             $pageRegistry->register($this->app->make($definition));
         }
     }

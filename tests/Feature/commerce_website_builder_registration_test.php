@@ -8,7 +8,7 @@ it('registers the commerce website builder integration', function () {
 
     expect($integrations)->toHaveCount(1);
     expect($integrations[0]['module'])->toBe('commerce-website-builder');
-    expect($integrations[0]['blocks'])->toHaveCount(5);
+    expect($integrations[0]['blocks'])->toHaveCount(6);
 });
 
 it('registers commerce storefront page definitions', function () {
@@ -23,5 +23,6 @@ it('registers commerce storefront page definitions', function () {
         'commerce:product',
         'commerce:cart',
         'commerce:checkout',
+        'commerce:account-orders',
     );
 });

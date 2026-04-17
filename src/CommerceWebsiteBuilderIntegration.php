@@ -49,6 +49,12 @@ class CommerceWebsiteBuilderIntegration implements WebsiteBuilderIntegration
                 'category' => 'Commerce',
                 'description' => 'Lightweight checkout form that places an order from the active cart.',
             ],
+            [
+                'type' => 'commerce-order-list',
+                'label' => 'Commerce Order List',
+                'category' => 'Commerce',
+                'description' => 'Account order history for the current customer or visitor session.',
+            ],
         ];
     }
 }
