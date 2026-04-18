@@ -21,6 +21,20 @@ class RootServiceProvider extends PackageServiceProvider
             ->hasConfigFile();
     }
 
+    public function packageRegistered(): void
+    {
+        $manifest = config('commerce-website-builder.localization_manifest', []);
+
+        if (! is_array($manifest) || $manifest === []) {
+            return;
+        }
+
+        config()->set(
+            'website-builder.localization_manifest',
+            array_replace_recursive((array) config('website-builder.localization_manifest', []), $manifest),
+        );
+    }
+
     public function packageBooted(): void
     {
         $this->app->make(WebsiteBuilderIntegrationRegistry::class)

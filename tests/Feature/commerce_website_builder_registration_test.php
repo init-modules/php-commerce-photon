@@ -26,3 +26,16 @@ it('registers commerce storefront page definitions', function () {
         'commerce:account-orders',
     );
 });
+
+it('registers commerce block localization manifest entries', function () {
+    $manifest = config('website-builder.localization_manifest');
+
+    expect($manifest)->toHaveKey('commerce-website-builder::commerce-product-grid');
+    expect($manifest)->toHaveKey('commerce-website-builder::commerce-product-detail');
+    expect($manifest)->toHaveKey('commerce-website-builder::commerce-add-to-cart');
+    expect($manifest)->toHaveKey('commerce-website-builder::commerce-cart-summary');
+    expect($manifest)->toHaveKey('commerce-website-builder::commerce-checkout-form');
+    expect($manifest)->toHaveKey('commerce-website-builder::commerce-order-list');
+    expect($manifest['commerce-website-builder::commerce-order-list']['localized'])->toContain('eyebrow');
+    expect($manifest['commerce-website-builder::commerce-order-list']['shared'])->toContain('limit');
+});
