@@ -87,6 +87,7 @@ class CatalogPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
                         'Добавьте активные позиции каталога, чтобы открыть этот раздел витрины.',
                     ),
                     'cardCtaLabel' => $this->copy('View product', 'Открыть товар'),
+                    'addToCartLabel' => $this->copy('Add to cart', 'В корзину'),
                     'columns' => 3,
                     'showDescription' => true,
                 ],
@@ -94,7 +95,7 @@ class CatalogPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
                     'items' => [
                         'source' => 'commerceCatalog',
                         'path' => 'items',
-                        'mode' => 'read',
+                        'mode' => 'write',
                     ],
                 ],
             ],
@@ -120,6 +121,43 @@ class CatalogPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
         ];
     }
 
+    public function persistResources(array $context, array $resources): void
+    {
+        $catalogResource = $resources['commerceCatalog'] ?? null;
+
+        if (! is_array($catalogResource)) {
+            return;
+        }
+
+        foreach (['items', 'products', 'services'] as $collectionKey) {
+            $items = $catalogResource[$collectionKey] ?? null;
+
+            if (! is_array($items)) {
+                continue;
+            }
+
+            foreach ($items as $payload) {
+                if (! is_array($payload)) {
+                    continue;
+                }
+
+                $id = $payload['id'] ?? null;
+
+                if (! is_string($id) || trim($id) === '') {
+                    continue;
+                }
+
+                $item = CatalogItem::query()->whereKey($id)->first();
+
+                if (! $item instanceof CatalogItem) {
+                    continue;
+                }
+
+                $this->persistCatalogItemPayload($item, $payload);
+            }
+        }
+    }
+
     protected function catalogItemPayload(CatalogItem $item): array
     {
         return [
@@ -139,5 +177,26 @@ class CatalogPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
             ]),
             'coverImage' => $item->getFirstMediaUrl('cover') ?: null,
         ];
+    }
+
+    protected function persistCatalogItemPayload(CatalogItem $item, array $payload): void
+    {
+        $updates = [];
+
+        foreach (['name', 'sku', 'description'] as $field) {
+            if (array_key_exists($field, $payload)) {
+                $updates[$field] = is_string($payload[$field])
+                    ? trim($payload[$field])
+                    : null;
+            }
+        }
+
+        if (isset($updates['name']) && $updates['name'] === '') {
+            unset($updates['name']);
+        }
+
+        if ($updates !== []) {
+            $item->fill($updates)->save();
+        }
     }
 }

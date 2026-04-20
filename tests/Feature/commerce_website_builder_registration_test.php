@@ -36,6 +36,9 @@ it('registers commerce block localization manifest entries', function () {
     expect($manifest)->toHaveKey('commerce-website-builder::commerce-cart-summary');
     expect($manifest)->toHaveKey('commerce-website-builder::commerce-checkout-form');
     expect($manifest)->toHaveKey('commerce-website-builder::commerce-order-list');
+    expect($manifest['commerce-website-builder::commerce-product-grid']['localized'])->toContain('addToCartLabel');
+    expect($manifest['commerce-website-builder::commerce-product-grid']['shared'])->toContain('columns');
+    expect($manifest['commerce-website-builder::commerce-order-list']['localized'])->toContain('authLabel');
     expect($manifest['commerce-website-builder::commerce-order-list']['localized'])->toContain('eyebrow');
     expect($manifest['commerce-website-builder::commerce-order-list']['shared'])->toContain('limit');
 });

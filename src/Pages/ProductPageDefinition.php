@@ -121,7 +121,7 @@ class ProductPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
                     'product' => [
                         'source' => 'commerceProduct',
                         'path' => 'product',
-                        'mode' => 'read',
+                        'mode' => 'write',
                     ],
                 ],
             ],
@@ -158,6 +158,41 @@ class ProductPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
                 'product' => $this->productPayload($item),
             ],
         ];
+    }
+
+    public function persistResources(array $context, array $resources): void
+    {
+        $payload = $resources['commerceProduct']['product'] ?? null;
+
+        if (! is_array($payload)) {
+            return;
+        }
+
+        $item = CatalogItem::query()
+            ->where('slug', (string) ($context['slug'] ?? ''))
+            ->first();
+
+        if (! $item instanceof CatalogItem) {
+            return;
+        }
+
+        $updates = [];
+
+        foreach (['name', 'sku', 'description'] as $field) {
+            if (array_key_exists($field, $payload)) {
+                $updates[$field] = is_string($payload[$field])
+                    ? trim($payload[$field])
+                    : null;
+            }
+        }
+
+        if (isset($updates['name']) && $updates['name'] === '') {
+            unset($updates['name']);
+        }
+
+        if ($updates !== []) {
+            $item->fill($updates)->save();
+        }
     }
 
     protected function productPayload(CatalogItem $item): array

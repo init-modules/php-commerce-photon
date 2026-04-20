@@ -12,6 +12,7 @@ return [
     'localization_manifest' => [
         'commerce-website-builder::commerce-product-grid' => [
             'localized' => [
+                'addToCartLabel',
                 'body',
                 'cardCtaLabel',
                 'emptyBody',
@@ -76,6 +77,7 @@ return [
         ],
         'commerce-website-builder::commerce-order-list' => [
             'localized' => [
+                'authLabel',
                 'catalogLabel',
                 'emptyBody',
                 'emptyTitle',
