@@ -2,15 +2,15 @@
 
 return [
     'routes' => [
-        'catalog' => env('COMMERCE_WEBSITE_BUILDER_CATALOG_ROUTE', '/catalog'),
-        'product' => env('COMMERCE_WEBSITE_BUILDER_PRODUCT_ROUTE', '/catalog/{slug}'),
-        'cart' => env('COMMERCE_WEBSITE_BUILDER_CART_ROUTE', '/cart'),
-        'checkout' => env('COMMERCE_WEBSITE_BUILDER_CHECKOUT_ROUTE', '/checkout'),
-        'account_orders' => env('COMMERCE_WEBSITE_BUILDER_ACCOUNT_ORDERS_ROUTE', '/account/orders'),
+        'catalog' => env('COMMERCE_PHOTON_CATALOG_ROUTE', '/catalog'),
+        'product' => env('COMMERCE_PHOTON_PRODUCT_ROUTE', '/catalog/{slug}'),
+        'cart' => env('COMMERCE_PHOTON_CART_ROUTE', '/cart'),
+        'checkout' => env('COMMERCE_PHOTON_CHECKOUT_ROUTE', '/checkout'),
+        'account_orders' => env('COMMERCE_PHOTON_ACCOUNT_ORDERS_ROUTE', '/account/orders'),
     ],
-    'catalog_limit' => (int) env('COMMERCE_WEBSITE_BUILDER_CATALOG_LIMIT', 24),
+    'catalog_limit' => (int) env('COMMERCE_PHOTON_CATALOG_LIMIT', 24),
     'localization_manifest' => [
-        'commerce-website-builder::commerce-product-grid' => [
+        'commerce-photon::commerce-product-grid' => [
             'localized' => [
                 'addToCartLabel',
                 'body',
@@ -25,7 +25,7 @@ return [
                 'showDescription',
             ],
         ],
-        'commerce-website-builder::commerce-product-detail' => [
+        'commerce-photon::commerce-product-detail' => [
             'localized' => [
                 'backLabel',
                 'eyebrow',
@@ -36,7 +36,7 @@ return [
                 'showSku',
             ],
         ],
-        'commerce-website-builder::commerce-add-to-cart' => [
+        'commerce-photon::commerce-add-to-cart' => [
             'localized' => [
                 'buttonLabel',
                 'quantityLabel',
@@ -46,7 +46,7 @@ return [
                 'cartHref',
             ],
         ],
-        'commerce-website-builder::commerce-cart-summary' => [
+        'commerce-photon::commerce-cart-summary' => [
             'localized' => [
                 'catalogLabel',
                 'checkoutLabel',
@@ -60,7 +60,7 @@ return [
                 'checkoutHref',
             ],
         ],
-        'commerce-website-builder::commerce-checkout-form' => [
+        'commerce-photon::commerce-checkout-form' => [
             'localized' => [
                 'body',
                 'emailLabel',
@@ -75,7 +75,7 @@ return [
                 'cartHref',
             ],
         ],
-        'commerce-website-builder::commerce-order-list' => [
+        'commerce-photon::commerce-order-list' => [
             'localized' => [
                 'authLabel',
                 'catalogLabel',

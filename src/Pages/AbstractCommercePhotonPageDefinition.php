@@ -1,12 +1,12 @@
 <?php
 
-namespace Init\CommerceWebsiteBuilder\Pages;
+namespace Init\CommercePhoton\Pages;
 
 use Illuminate\Support\Str;
-use Init\WebsiteBuilder\Data\WebsiteBuilderDocumentData;
-use Init\WebsiteBuilder\Pages\Contracts\WebsiteBuilderPageDefinition;
+use Init\Photon\Data\PhotonDocumentData;
+use Init\Photon\Pages\Contracts\PhotonPageDefinition;
 
-abstract class AbstractCommerceWebsiteBuilderPageDefinition implements WebsiteBuilderPageDefinition
+abstract class AbstractCommercePhotonPageDefinition implements PhotonPageDefinition
 {
     public function group(): ?string
     {
@@ -24,10 +24,10 @@ abstract class AbstractCommerceWebsiteBuilderPageDefinition implements WebsiteBu
     }
 
     public function resolveDocument(
-        WebsiteBuilderDocumentData $document,
+        PhotonDocumentData $document,
         array $context,
-    ): WebsiteBuilderDocumentData {
-        return WebsiteBuilderDocumentData::createFromPayload([
+    ): PhotonDocumentData {
+        return PhotonDocumentData::createFromPayload([
             ...$document->toArray(),
             'name' => $this->name(),
             'route' => $this->routePattern(),
@@ -35,11 +35,11 @@ abstract class AbstractCommerceWebsiteBuilderPageDefinition implements WebsiteBu
     }
 
     public function prepareDocumentForSave(
-        WebsiteBuilderDocumentData $storedDocument,
-        WebsiteBuilderDocumentData $submittedDocument,
+        PhotonDocumentData $storedDocument,
+        PhotonDocumentData $submittedDocument,
         array $context,
-    ): WebsiteBuilderDocumentData {
-        return WebsiteBuilderDocumentData::createFromPayload([
+    ): PhotonDocumentData {
+        return PhotonDocumentData::createFromPayload([
             ...$submittedDocument->toArray(),
             'name' => $this->name(),
             'route' => $this->routePattern(),
@@ -75,7 +75,7 @@ abstract class AbstractCommerceWebsiteBuilderPageDefinition implements WebsiteBu
 
     protected function routeConfig(string $key, string $fallback): string
     {
-        $configured = config("commerce-website-builder.routes.{$key}");
+        $configured = config("commerce-photon.routes.{$key}");
 
         if (is_string($configured) && trim($configured) !== '') {
             return $this->normalizePath($configured);
@@ -149,10 +149,10 @@ abstract class AbstractCommerceWebsiteBuilderPageDefinition implements WebsiteBu
             ->value() ?: 'en';
     }
 
-    protected function makeDocument(string $suffix, array $blocks): WebsiteBuilderDocumentData
+    protected function makeDocument(string $suffix, array $blocks): PhotonDocumentData
     {
-        return WebsiteBuilderDocumentData::createFromPayload([
-            'id' => 'website-builder-commerce-' . $suffix,
+        return PhotonDocumentData::createFromPayload([
+            'id' => 'photon-commerce-' . $suffix,
             'name' => $this->name(),
             'route' => $this->routePattern(),
             'updatedAt' => now()->toISOString(),

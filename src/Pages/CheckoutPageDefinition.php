@@ -1,10 +1,10 @@
 <?php
 
-namespace Init\CommerceWebsiteBuilder\Pages;
+namespace Init\CommercePhoton\Pages;
 
-use Init\WebsiteBuilder\Data\WebsiteBuilderDocumentData;
+use Init\Photon\Data\PhotonDocumentData;
 
-class CheckoutPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
+class CheckoutPageDefinition extends AbstractCommercePhotonPageDefinition
 {
     public function key(): string
     {
@@ -49,12 +49,12 @@ class CheckoutPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinitio
         return $this->normalizePath($path) === $this->routePattern() ? [] : null;
     }
 
-    public function fallbackDocument(): WebsiteBuilderDocumentData
+    public function fallbackDocument(): PhotonDocumentData
     {
         return $this->makeDocument('checkout', [
             [
                 'id' => 'commerce-checkout-form',
-                'module' => 'commerce-website-builder',
+                'module' => 'commerce-photon',
                 'type' => 'commerce-checkout-form',
                 'props' => [
                     'eyebrow' => $this->copy('Checkout', 'Оформление'),

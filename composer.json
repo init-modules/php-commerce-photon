@@ -1,13 +1,13 @@
 {
-	"name": "init/commerce-website-builder",
+	"name": "init/commerce-photon",
 	"version": "dev-main",
-	"description": "Website Builder integration package for init commerce foundation packages",
+	"description": "Photon integration package for init commerce foundation packages",
 	"type": "library",
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Init Modules",
-			"email": "dev@init-modules.com"
+			"name": "Init",
+			"email": "dev@init.com"
 		}
 	],
 	"repositories": [
@@ -22,17 +22,17 @@
 		"init/commerce-cart": "^1",
 		"init/commerce-catalog": "^1",
 		"init/commerce-order": "^1",
-		"init/website-builder": "^1.0",
+		"init/photon": "^1.0",
 		"spatie/laravel-package-tools": "^1.16"
 	},
 	"autoload": {
 		"psr-4": {
-			"Init\\CommerceWebsiteBuilder\\": "src/"
+			"Init\\CommercePhoton\\": "src/"
 		}
 	},
 	"extra": {
 		"laravel": {
-			"providers": ["Init\\CommerceWebsiteBuilder\\RootServiceProvider"]
+			"providers": ["Init\\CommercePhoton\\RootServiceProvider"]
 		},
 		"merge-plugin": {
 			"include": ["composer.local.json"],

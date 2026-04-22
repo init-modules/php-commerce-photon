@@ -1,14 +1,14 @@
 <?php
 
-namespace Init\CommerceWebsiteBuilder;
+namespace Init\CommercePhoton;
 
-use Init\CommerceWebsiteBuilder\Pages\AccountOrdersPageDefinition;
-use Init\CommerceWebsiteBuilder\Pages\CartPageDefinition;
-use Init\CommerceWebsiteBuilder\Pages\CatalogPageDefinition;
-use Init\CommerceWebsiteBuilder\Pages\CheckoutPageDefinition;
-use Init\CommerceWebsiteBuilder\Pages\ProductPageDefinition;
-use Init\WebsiteBuilder\Pages\Registry\WebsiteBuilderPageRegistry;
-use Init\WebsiteBuilder\Registry\WebsiteBuilderIntegrationRegistry;
+use Init\CommercePhoton\Pages\AccountOrdersPageDefinition;
+use Init\CommercePhoton\Pages\CartPageDefinition;
+use Init\CommercePhoton\Pages\CatalogPageDefinition;
+use Init\CommercePhoton\Pages\CheckoutPageDefinition;
+use Init\CommercePhoton\Pages\ProductPageDefinition;
+use Init\Photon\Pages\Registry\PhotonPageRegistry;
+use Init\Photon\Registry\PhotonIntegrationRegistry;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -17,30 +17,30 @@ class RootServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('commerce-website-builder')
+            ->name('commerce-photon')
             ->hasConfigFile();
     }
 
     public function packageRegistered(): void
     {
-        $manifest = config('commerce-website-builder.localization_manifest', []);
+        $manifest = config('commerce-photon.localization_manifest', []);
 
         if (! is_array($manifest) || $manifest === []) {
             return;
         }
 
         config()->set(
-            'website-builder.localization_manifest',
-            array_replace_recursive((array) config('website-builder.localization_manifest', []), $manifest),
+            'photon.localization_manifest',
+            array_replace_recursive((array) config('photon.localization_manifest', []), $manifest),
         );
     }
 
     public function packageBooted(): void
     {
-        $this->app->make(WebsiteBuilderIntegrationRegistry::class)
-            ->register($this->app->make(CommerceWebsiteBuilderIntegration::class));
+        $this->app->make(PhotonIntegrationRegistry::class)
+            ->register($this->app->make(CommercePhotonIntegration::class));
 
-        $pageRegistry = $this->app->make(WebsiteBuilderPageRegistry::class);
+        $pageRegistry = $this->app->make(PhotonPageRegistry::class);
 
         foreach ([CatalogPageDefinition::class, ProductPageDefinition::class, CartPageDefinition::class, CheckoutPageDefinition::class, AccountOrdersPageDefinition::class] as $definition) {
             $pageRegistry->register($this->app->make($definition));

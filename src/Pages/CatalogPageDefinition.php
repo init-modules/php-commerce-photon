@@ -1,14 +1,14 @@
 <?php
 
-namespace Init\CommerceWebsiteBuilder\Pages;
+namespace Init\CommercePhoton\Pages;
 
 use Illuminate\Database\Eloquent\Builder;
 use Init\Commerce\Catalog\Models\CatalogItem;
-use Init\WebsiteBuilder\Data\WebsiteBuilderDocumentData;
-use Init\WebsiteBuilder\Pages\Contracts\WebsiteBuilderSearchablePageDefinition;
-use Init\WebsiteBuilder\Search\Support\WebsiteBuilderSearchPageCandidate;
+use Init\Photon\Data\PhotonDocumentData;
+use Init\Photon\Pages\Contracts\PhotonSearchablePageDefinition;
+use Init\Photon\Search\Support\PhotonSearchPageCandidate;
 
-class CatalogPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition implements WebsiteBuilderSearchablePageDefinition
+class CatalogPageDefinition extends AbstractCommercePhotonPageDefinition implements PhotonSearchablePageDefinition
 {
     public function key(): string
     {
@@ -60,19 +60,19 @@ class CatalogPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
         }
 
         return [
-            new WebsiteBuilderSearchPageCandidate(
+            new PhotonSearchPageCandidate(
                 route: $this->routePattern(),
                 name: $this->name(),
             ),
         ];
     }
 
-    public function fallbackDocument(): WebsiteBuilderDocumentData
+    public function fallbackDocument(): PhotonDocumentData
     {
         return $this->makeDocument('catalog', [
             [
                 'id' => 'commerce-product-grid',
-                'module' => 'commerce-website-builder',
+                'module' => 'commerce-photon',
                 'type' => 'commerce-product-grid',
                 'props' => [
                     'eyebrow' => $this->copy('Catalog', 'Каталог'),
@@ -104,7 +104,7 @@ class CatalogPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
 
     public function resolveResources(array $context): array
     {
-        $limit = max(1, min((int) config('commerce-website-builder.catalog_limit', 24), 60));
+        $limit = max(1, min((int) config('commerce-photon.catalog_limit', 24), 60));
 
         $items = CatalogItem::query()
             ->publiclyVisible()

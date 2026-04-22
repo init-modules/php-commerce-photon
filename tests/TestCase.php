@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Init\CommerceWebsiteBuilder\RootServiceProvider;
-use Init\WebsiteBuilder\RootServiceProvider as WebsiteBuilderRootServiceProvider;
+use Init\CommercePhoton\RootServiceProvider;
+use Init\Photon\RootServiceProvider as PhotonRootServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
@@ -11,7 +11,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            WebsiteBuilderRootServiceProvider::class,
+            PhotonRootServiceProvider::class,
             RootServiceProvider::class,
         ];
     }

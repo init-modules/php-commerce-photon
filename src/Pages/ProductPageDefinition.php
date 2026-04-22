@@ -1,14 +1,14 @@
 <?php
 
-namespace Init\CommerceWebsiteBuilder\Pages;
+namespace Init\CommercePhoton\Pages;
 
 use Illuminate\Database\Eloquent\Builder;
 use Init\Commerce\Catalog\Models\CatalogItem;
-use Init\WebsiteBuilder\Data\WebsiteBuilderDocumentData;
-use Init\WebsiteBuilder\Pages\Contracts\WebsiteBuilderSearchablePageDefinition;
-use Init\WebsiteBuilder\Search\Support\WebsiteBuilderSearchPageCandidate;
+use Init\Photon\Data\PhotonDocumentData;
+use Init\Photon\Pages\Contracts\PhotonSearchablePageDefinition;
+use Init\Photon\Search\Support\PhotonSearchPageCandidate;
 
-class ProductPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition implements WebsiteBuilderSearchablePageDefinition
+class ProductPageDefinition extends AbstractCommercePhotonPageDefinition implements PhotonSearchablePageDefinition
 {
     public function key(): string
     {
@@ -91,7 +91,7 @@ class ProductPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
             ->orderBy('name')
             ->limit(max(1, min($limit, 50)))
             ->get()
-            ->map(fn (CatalogItem $item): WebsiteBuilderSearchPageCandidate => new WebsiteBuilderSearchPageCandidate(
+            ->map(fn (CatalogItem $item): PhotonSearchPageCandidate => new PhotonSearchPageCandidate(
                 route: $this->buildRoute($this->routePattern(), [
                     'slug' => $item->slug,
                 ]),
@@ -103,12 +103,12 @@ class ProductPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
             ->all();
     }
 
-    public function fallbackDocument(): WebsiteBuilderDocumentData
+    public function fallbackDocument(): PhotonDocumentData
     {
         return $this->makeDocument('product', [
             [
                 'id' => 'commerce-product-detail',
-                'module' => 'commerce-website-builder',
+                'module' => 'commerce-photon',
                 'type' => 'commerce-product-detail',
                 'props' => [
                     'eyebrow' => $this->copy('Product', 'Товар'),
@@ -127,7 +127,7 @@ class ProductPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
             ],
             [
                 'id' => 'commerce-add-to-cart',
-                'module' => 'commerce-website-builder',
+                'module' => 'commerce-photon',
                 'type' => 'commerce-add-to-cart',
                 'props' => [
                     'quantityLabel' => $this->copy('Quantity', 'Количество'),

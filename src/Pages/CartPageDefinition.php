@@ -1,10 +1,10 @@
 <?php
 
-namespace Init\CommerceWebsiteBuilder\Pages;
+namespace Init\CommercePhoton\Pages;
 
-use Init\WebsiteBuilder\Data\WebsiteBuilderDocumentData;
+use Init\Photon\Data\PhotonDocumentData;
 
-class CartPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
+class CartPageDefinition extends AbstractCommercePhotonPageDefinition
 {
     public function key(): string
     {
@@ -49,12 +49,12 @@ class CartPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
         return $this->normalizePath($path) === $this->routePattern() ? [] : null;
     }
 
-    public function fallbackDocument(): WebsiteBuilderDocumentData
+    public function fallbackDocument(): PhotonDocumentData
     {
         return $this->makeDocument('cart', [
             [
                 'id' => 'commerce-cart-summary',
-                'module' => 'commerce-website-builder',
+                'module' => 'commerce-photon',
                 'type' => 'commerce-cart-summary',
                 'props' => [
                     'eyebrow' => $this->copy('Cart', 'Корзина'),

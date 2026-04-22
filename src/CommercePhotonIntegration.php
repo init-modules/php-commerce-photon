@@ -1,19 +1,19 @@
 <?php
 
-namespace Init\CommerceWebsiteBuilder;
+namespace Init\CommercePhoton;
 
-use Init\WebsiteBuilder\Contracts\WebsiteBuilderIntegration;
+use Init\Photon\Contracts\PhotonIntegration;
 
-class CommerceWebsiteBuilderIntegration implements WebsiteBuilderIntegration
+class CommercePhotonIntegration implements PhotonIntegration
 {
     public function module(): string
     {
-        return 'commerce-website-builder';
+        return 'commerce-photon';
     }
 
     public function label(): string
     {
-        return 'Commerce Website Builder';
+        return 'Commerce Photon';
     }
 
     public function blocks(): array

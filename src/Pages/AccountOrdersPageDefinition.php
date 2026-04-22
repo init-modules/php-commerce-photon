@@ -1,10 +1,10 @@
 <?php
 
-namespace Init\CommerceWebsiteBuilder\Pages;
+namespace Init\CommercePhoton\Pages;
 
-use Init\WebsiteBuilder\Data\WebsiteBuilderDocumentData;
+use Init\Photon\Data\PhotonDocumentData;
 
-class AccountOrdersPageDefinition extends AbstractCommerceWebsiteBuilderPageDefinition
+class AccountOrdersPageDefinition extends AbstractCommercePhotonPageDefinition
 {
     public function key(): string
     {
@@ -49,12 +49,12 @@ class AccountOrdersPageDefinition extends AbstractCommerceWebsiteBuilderPageDefi
         return $this->normalizePath($path) === $this->routePattern() ? [] : null;
     }
 
-    public function fallbackDocument(): WebsiteBuilderDocumentData
+    public function fallbackDocument(): PhotonDocumentData
     {
         return $this->makeDocument('account-orders', [
             [
                 'id' => 'commerce-order-list',
-                'module' => 'commerce-website-builder',
+                'module' => 'commerce-photon',
                 'type' => 'commerce-order-list',
                 'props' => [
                     'eyebrow' => $this->copy('Account', 'Личный кабинет'),
