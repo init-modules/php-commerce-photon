@@ -133,7 +133,7 @@ class ProductPageDefinition extends AbstractCommercePhotonPageDefinition impleme
                     'quantityLabel' => $this->copy('Quantity', 'Количество'),
                     'buttonLabel' => $this->copy('Add to cart', 'Добавить в корзину'),
                     'successLabel' => $this->copy('Added to cart', 'Добавлено в корзину'),
-                    'cartHref' => $this->routeConfig('cart', '/cart'),
+                    'cartHref' => $this->routeConfig('checkout', '/checkout') . '?checkoutStep=cart',
                 ],
                 'bindings' => [
                     'product' => [

@@ -3,7 +3,6 @@
 namespace Init\CommercePhoton;
 
 use Init\CommercePhoton\Pages\AccountOrdersPageDefinition;
-use Init\CommercePhoton\Pages\CartPageDefinition;
 use Init\CommercePhoton\Pages\CatalogPageDefinition;
 use Init\CommercePhoton\Pages\CheckoutPageDefinition;
 use Init\CommercePhoton\Pages\ProductPageDefinition;
@@ -42,7 +41,7 @@ class RootServiceProvider extends PackageServiceProvider
 
         $pageRegistry = $this->app->make(PhotonPageRegistry::class);
 
-        foreach ([CatalogPageDefinition::class, ProductPageDefinition::class, CartPageDefinition::class, CheckoutPageDefinition::class, AccountOrdersPageDefinition::class] as $definition) {
+        foreach ([CatalogPageDefinition::class, ProductPageDefinition::class, CheckoutPageDefinition::class, AccountOrdersPageDefinition::class] as $definition) {
             $pageRegistry->register($this->app->make($definition));
         }
     }

@@ -68,7 +68,7 @@ class CheckoutPageDefinition extends AbstractCommercePhotonPageDefinition
                     'phoneLabel' => $this->copy('Phone', 'Телефон'),
                     'submitLabel' => $this->copy('Place order', 'Разместить заказ'),
                     'successTitle' => $this->copy('Order placed', 'Заказ создан'),
-                    'cartHref' => $this->routeConfig('cart', '/cart'),
+                    'cartHref' => $this->routeConfig('checkout', '/checkout') . '?checkoutStep=cart',
                 ],
             ],
         ]);
